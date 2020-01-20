@@ -71,6 +71,15 @@ public class gameCommands {
         while(true)
         {
             boolean status = true;
+            if(playersBalance == 0)
+                {
+                    clearConsole();
+                    System.out.println("You have no money. Game Over :(");
+                    waitInput();
+                    System. exit(0);
+                    status = false;
+                    break;
+                }
             while(status == true)
             {
                 System.out.println("How much do you want to bet? Balance: $" + playersBalance);
@@ -80,10 +89,10 @@ public class gameCommands {
                     clearConsole();
                     System.out.println("Sorry but you dont have enough funds to bet that amount!");
                 }
-                else if(playersBalance == 0)
+                else if (bet < 0)
                 {
-                    status = false;
-                    break;
+                    clearConsole();
+                    System.out.println("Please enter a right amount!");
                 }
                 else
                 {
@@ -163,7 +172,7 @@ public class gameCommands {
             {
                 System.out.println("Card " + (x+1) + ": " + playersCards[x]);
             }
-            System.out.println(counter(playersCards, totalPlayersCards));
+            // System.out.println(counter(playersCards, totalPlayersCards)); to test the count of the cards
             System.out.println();
             if(counter(playersCards, totalPlayersCards) == 21)
             {
@@ -474,12 +483,13 @@ public class gameCommands {
         {
             if(array[x] == cards[0])
             {
-                if(array[1] == 'T')
+                if(count == 10 || (array[1] == 'T' && totalCards == 2))
                 {
                     count = 21;
-                    break;
                 }
+                else{
                 count += 1;
+                }
             }
             if(array[x] == cards[1])
             {
